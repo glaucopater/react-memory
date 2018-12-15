@@ -36,8 +36,7 @@ export default class Card extends Component {
     }
   };
 
-  render() {
-    let id = this.props.id;
+  render() { 
     let name = this.props.name;
     let thumbUrl = this.props.thumbUrl; 
     let cssClass = this.state.flipped ? "card flipped" : "card";
@@ -46,8 +45,7 @@ export default class Card extends Component {
     }
     return (
       <div className={cssClass} onClick={this.handleOnClick}>
-        <img src={thumbUrl} alt=""/>
-        Card {id} : {name}
+        <img src={thumbUrl} alt=""/> 
       </div>
     );
   }
