@@ -14,11 +14,9 @@ export default class Deck extends Component {
   }
 
   flipCard = card => {
-    console.log("deck flipcard", card, this.state.flippedCards);
     let flippedCards = this.state.flippedCards;
     let matchedCardsNames = this.state.matchedCardsNames;
     let reset = this.state.reset;
-
     if (flippedCards.length === 2) {
       flippedCards = [];
       reset = true;
@@ -28,10 +26,12 @@ export default class Deck extends Component {
       if (
         flippedCards.length > 1 &&
         flippedCards[0].name === flippedCards[1].name
-      ) {
-        console.log("flippedCards check ", flippedCards, card.name);
+      ) { 
         matchedCardsNames.push(flippedCards[0].name);
         flippedCards = [];
+      }
+      else if (flippedCards.length > 1) {  
+        this.delayedReset();
       }
     }
     this.setState({
@@ -41,10 +41,15 @@ export default class Deck extends Component {
     });
   };
 
+  delayedReset() { 
+      setTimeout(
+        () => { this.setState({flippedCards: [], reset: true});}, 600
+    );
+  }
+
   render() {
     let flippedCards = this.state.flippedCards;
     let matchedCardsNames = this.state.matchedCardsNames;
-
     //a deck is a list of cards
     let cards = [
       { id: 1, name: 1 },

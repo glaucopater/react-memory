@@ -8,7 +8,6 @@ export default class Card extends Component {
       flipped: false,
       alreadyMatched: false
     };
-
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
@@ -40,7 +39,6 @@ export default class Card extends Component {
   render() {
     let id = this.props.id;
     let name = this.props.name;
-    console.log(id, name, this.props.matchedCardsNames);
     let cssClass = this.state.flipped ? "card flipped" : "card";
     if(this.isAlreadyMAtched(name)) {
       cssClass += " alreadyMatched flipped";
