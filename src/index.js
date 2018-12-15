@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Deck  from "./components/Deck.js";
+import Board  from "./components/Board.js";
 import "./styles.css";
 
 function App() {
   return (
     <div className="App"> 
-      <Deck/>
+      <Board/>
     </div>
   );
 }
