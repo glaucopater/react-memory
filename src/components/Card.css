@@ -1,6 +1,6 @@
 .card {
   border: 2px solid grey;
-  width: 100px;
+  width: 180px;
   height: 150px;
   margin: 8px;
   padding: 16px;
@@ -10,13 +10,25 @@
   cursor: pointer;
 }
 
+.card > img {
+  opacity: 0;
+}
+
 .flipped {
   background: #ccc;
   cursor: default;
 }
 
-.alreadyMatched {
+.flipped > img {
+  opacity: 1;
+}
+
+.already-matched {
   border: 2px solid green;
   cursor: default;
   background: greenyellow;
+}
+
+.already-matched > img {
+  opacity: 0.7;
 }
