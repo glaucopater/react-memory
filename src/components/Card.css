@@ -12,9 +12,11 @@
 
 .flipped {
   background: #ccc;
+  cursor: default;
 }
 
 .alreadyMatched {
   border: 2px solid green;
   cursor: default;
+  background: greenyellow;
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import Deck  from "./components/Deck.js";
-
 import "./styles.css";
 
 function App() {
