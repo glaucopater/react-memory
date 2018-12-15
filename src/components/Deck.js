@@ -10,7 +10,6 @@ export default class Deck extends Component {
       matchedCardsNames: [],
       reset: false
     };
-
     this.flipCard = this.flipCard.bind(this);
   }
 
@@ -32,6 +31,7 @@ export default class Deck extends Component {
       ) {
         console.log("flippedCards check ", flippedCards, card.name);
         matchedCardsNames.push(flippedCards[0].name);
+        flippedCards = [];
       }
     }
     this.setState({
@@ -56,6 +56,7 @@ export default class Deck extends Component {
     ].map(card => {
       return (
         <Card
+          key={card.id}
           id={card.id}
           name={card.name}
           flippedCards={flippedCards}
@@ -65,6 +66,10 @@ export default class Deck extends Component {
         />
       );
     });
-    return <div className="deck">{cards}</div>;
+    if(matchedCardsNames.length === cards.length / 2){
+      return <div className="deck">You win</div> 
+    }
+    else
+      return <div className="deck">{cards}</div>;
   }
 }
