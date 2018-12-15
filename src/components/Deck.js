@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import "./Deck.css";
 import Card from "./Card";
 import { API_URL, X_CLIENT_ID, MAX_ITEMS, DELAY } from "../constants";
+import { shuffle } from "../util";
+
 
 export default class Deck extends Component {
   constructor() {
@@ -9,8 +10,7 @@ export default class Deck extends Component {
     this.state = {
       flippedCards: [],
       matchedCardsNames: [],
-      reset: false,
-      items: [],
+      reset: false, 
       cards: []
     };
     this.flipCard = this.flipCard.bind(this);
@@ -18,7 +18,6 @@ export default class Deck extends Component {
 
   componentDidMount(){
     this.fetchData();
-    
   }
 
   flipCard = card => {
@@ -66,24 +65,9 @@ export default class Deck extends Component {
     .then(response => response.json()
     .then(json => {
       const items = json.photos.items.slice(0,MAX_ITEMS).filter( elem => elem.id );
-      const cards = this.shuffle(this.randomizeBoard(items));
+      const cards = shuffle(this.randomizeBoard(items));
       this.setState({cards}); 
     }));  
-  }
-
-  //Fisher–Yates algorithm
-  shuffle(array) {
-    let m = array.length, t, i;
-    // While there remain elements to shuffle…
-    while (m) {
-      // Pick a remaining element…
-       i = Math.floor(Math.random() * m--);
-      // And swap it with the current element.
-      t = array[m];
-      array[m] = array[i];
-      array[i] = t;
-    }
-    return array;
   }
 
   randomizeBoard(cards){ 
