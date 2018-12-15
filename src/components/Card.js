@@ -39,12 +39,14 @@ export default class Card extends Component {
   render() {
     let id = this.props.id;
     let name = this.props.name;
+    let thumbUrl = this.props.thumbUrl; 
     let cssClass = this.state.flipped ? "card flipped" : "card";
     if(this.isAlreadyMAtched(name)) {
-      cssClass += " alreadyMatched flipped";
+      cssClass += " already-matched flipped";
     }
     return (
       <div className={cssClass} onClick={this.handleOnClick}>
+        <img src={thumbUrl} alt=""/>
         Card {id} : {name}
       </div>
     );
