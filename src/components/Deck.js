@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Deck.css";
 import Card from "./Card";
-import { API_URL, X_CLIENT_ID } from "../constants";
+import { API_URL, X_CLIENT_ID, MAX_ITEMS, DELAY } from "../constants";
 
 export default class Deck extends Component {
   constructor() {
@@ -10,9 +10,15 @@ export default class Deck extends Component {
       flippedCards: [],
       matchedCardsNames: [],
       reset: false,
+      items: [],
       cards: []
     };
     this.flipCard = this.flipCard.bind(this);
+  }
+
+  componentDidMount(){
+    this.fetchData();
+    
   }
 
   flipCard = card => {
@@ -44,40 +50,49 @@ export default class Deck extends Component {
   };
 
   delayedReset() { 
-      setTimeout(
-        () => { this.setState({flippedCards: [], reset: true});}, 600
-    );
+      setTimeout(() => { this.setState({flippedCards: [], reset: true});}, DELAY);
   }
 
- 
-  fetchData(){
-      const url =  API_URL;
-      return fetch(url, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin 
-        credentials: "same-origin", // include, *same-origin, omit
+  fetchData() {
+      return fetch(API_URL, {
+        method: "GET",  
+        mode: "cors",
+        credentials: "same-origin",  
         headers: {
             "Content-Type": "application/json; charset=utf-8", 
             "X-Client-Id" : X_CLIENT_ID
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
+        }
     })
     .then(response => response.json()
     .then(json => {
-      const cards = json.photos.items.slice(0,6).filter( elem => elem.id );
+      const items = json.photos.items.slice(0,MAX_ITEMS).filter( elem => elem.id );
+      const cards = this.shuffle(this.randomizeBoard(items));
       this.setState({cards}); 
     }));  
   }
 
-  randomizeBoard(){ 
-    const newCards =  this.state.cards.reduce(function (res, current, index, array) { 
+  //Fisher–Yates algorithm
+  shuffle(array) {
+    let m = array.length, t, i;
+    // While there remain elements to shuffle…
+    while (m) {
+      // Pick a remaining element…
+       i = Math.floor(Math.random() * m--);
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+    return array;
+  }
+
+  randomizeBoard(cards){ 
+    const newCards =  cards.reduce(function (res, current, index, array) { 
         let { id, file_id , thumbUrl } = current;
         const uniqueIndex = id + "-" + index; 
         const uniqueIndex2 = id + "-" + (index+1);
         return res.concat([ {index : uniqueIndex, id, name : id, file_id , thumbUrl }, {index: uniqueIndex2,name : id,  id, file_id , thumbUrl}]);
     }, []);
-  
     return newCards;
   }
 
@@ -85,14 +100,12 @@ export default class Deck extends Component {
     let flippedCards = this.state.flippedCards;
     let matchedCardsNames = this.state.matchedCardsNames;
     //a deck is a list of cards
-    const cards = this.randomizeBoard();
+    const cards = this.state.cards;
     let newCards = cards.map(card => {
       return (
         <Card
           key={card.index}
-          id={card.id}
-          name={card.name}
-          thumbUrl={card.thumbUrl}
+          {...card} 
           flippedCards={flippedCards}
           matchedCardsNames={matchedCardsNames}
           flipCard={this.flipCard}
@@ -101,12 +114,10 @@ export default class Deck extends Component {
       );
     });
     if(matchedCardsNames.length === cards.length / 2){
-      this.fetchData();
       return <div className="deck">You win</div> 
     }
     else{
       return <div className="deck">{newCards}</div>;
     }
-      
   }
 }

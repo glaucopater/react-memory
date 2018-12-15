@@ -1,7 +1,6 @@
 .card {
   border: 2px solid grey;
-  width: 180px;
-  height: 150px;
+  width: 180px; 
   margin: 8px;
   padding: 16px;
   border-radius: 8px;
@@ -11,6 +10,8 @@
 }
 
 .card > img {
+  max-width: 150px;
+  max-height: 100px;
   opacity: 0;
 }
 
