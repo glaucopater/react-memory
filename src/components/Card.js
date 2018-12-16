@@ -43,7 +43,7 @@ export default class Card extends Component {
     let thumbUrl = this.props.thumbUrl; 
     let cssClass = this.state.flipped ? "inside picked" : "inside";
     if(this.isAlreadyMAtched(name)) {
-      cssClass += "inside picked matched";
+      cssClass += " matched";
     }
     return (
       <div className="card" onClick={this.handleOnClick}>
