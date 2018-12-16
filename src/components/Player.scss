@@ -1,0 +1,13 @@
+@import "../styles.scss";
+
+.player {
+  height: 25px;
+  padding: 5px;
+  border: 1px solid #000;
+  font-weight: 500;
+  color: #fff;
+
+}
+.active {
+    color:greenyellow;
+  }
