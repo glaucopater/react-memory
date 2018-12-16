@@ -140,6 +140,13 @@ export default class Board extends Component {
     players.push(<Player key="0" name="0" activePlayer={activePlayer} score={score0}/>);
     players.push(<Player key="1" name="1" activePlayer={activePlayer} score={score1}/>);
     const boardContent = (matchedCardsNames.length === cards.length / 2) ? this.getWinner(activePlayer) : newCards;
-    return <div className="board">{round}{players}{boardContent}</div>;
+    return (
+    <div className="board-container">
+      <div className="game-info">{round}{players}</div>
+      <div className="board">
+        {boardContent}
+      </div>
+    </div>
+    );
   }
 }

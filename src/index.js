@@ -5,7 +5,8 @@ import "./styles.scss";
 
 function App() {
   return (
-    <div className="App"> 
+    <div className="App">
+    <h3>Memory React</h3>
       <Board/>
     </div>
   );
