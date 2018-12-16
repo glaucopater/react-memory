@@ -8,7 +8,7 @@ const Player = (props) => {
         const cssClass = isActive() ? "player active" : "player";  
         return (
             <div className={cssClass}> 
-                <label>Player {props.name}:</label><span> {props.score}</span>
+                <label>Player {+props.name+1}:</label><span> {props.score}</span>
             </div>
         );
 }

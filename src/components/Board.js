@@ -113,7 +113,7 @@ export default class Board extends Component {
   }
 
   getWinner(winner){
-    return <div className="winning"><label>Player </label>{winner} wins!</div>
+    return <div className="winning"><label>Player </label>{+winner + 1} wins!</div>
   }
 
   render() {
