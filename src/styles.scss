@@ -18,25 +18,8 @@ body {
   padding-bottom: 20px;
 }
 
-.board {
-	transform-style: preserve-3d;
-	perspective: 500px;
-	min-height: 100%;
-	height: 100%;
-	background: #000;
-}
-
 @mixin width($max){
 	@media (max-width: $max){
 		@content;
-	}
-}
-
-@keyframes matchAnim {
-	0% {
-		background: #bcffcc;
-	}
-	100% {
-		background: white;
 	}
 }
