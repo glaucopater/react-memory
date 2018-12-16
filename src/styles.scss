@@ -1,0 +1,41 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body { 
+	min-height: 100%;
+	font-family: "Arial", sans-serif;
+}
+
+.App, #root {
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+  padding-bottom: 20px;
+}
+
+.board {
+	transform-style: preserve-3d;
+	perspective: 500px;
+	min-height: 100%;
+	height: 100%;
+}
+
+@mixin width($max){
+	@media (max-width: $max){
+		@content;
+	}
+}
+
+@keyframes matchAnim {
+	0% {
+		background: #bcffcc;
+	}
+	100% {
+		background: white;
+	}
+}

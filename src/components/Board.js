@@ -4,7 +4,7 @@ import { API_URL, X_CLIENT_ID, MAX_ITEMS, DELAY } from "../constants";
 import { shuffle } from "../util";
 
 
-export default class Deck extends Component {
+export default class Board extends Component {
   constructor() {
     super();
     this.state = {
@@ -82,8 +82,7 @@ export default class Deck extends Component {
 
   render() {
     let flippedCards = this.state.flippedCards;
-    let matchedCardsNames = this.state.matchedCardsNames;
-    //a deck is a list of cards
+    let matchedCardsNames = this.state.matchedCardsNames; 
     const cards = this.state.cards;
     let newCards = cards.map(card => {
       return (
@@ -97,11 +96,9 @@ export default class Deck extends Component {
         />
       );
     });
-    if(matchedCardsNames.length === cards.length / 2){
-      return <div className="deck">You win</div> 
-    }
-    else{
-      return <div className="deck">{newCards}</div>;
-    }
+
+    const boardContent = (matchedCardsNames.length === cards.length / 2) ? "You win" : newCards;
+    return <div className="board">{boardContent}</div>;
+    
   }
 }
