@@ -1,9 +1,35 @@
 @import "../styles.scss";
 
+.board {
+	transform-style: preserve-3d;
+	perspective: 500px;
+	min-height: 100%;
+	height: 100%;
+	background: #000;
+}
+
+@keyframes matchAnim {
+	0% {
+		background: #bcffcc;
+	}
+	100% {
+		background: white;
+	}
+}
+
 .round {
   height: 25px;
   padding: 5px;
   border: 1px solid #000;
   font-weight: 500;
   color: #fff;
+}
+
+.winning {
+  height: 25px;
+  padding: 5px;
+  border: 1px solid #000;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
 }
