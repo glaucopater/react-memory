@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import "./Card.css";
+import React, { Component } from "react"; 
+import "./Card.scss"; 
+import logo from "../assets/images/eyeem-logo.jpg"; 
+
 
 export default class Card extends Component {
   constructor() {
@@ -39,13 +41,20 @@ export default class Card extends Component {
   render() { 
     let name = this.props.name;
     let thumbUrl = this.props.thumbUrl; 
-    let cssClass = this.state.flipped ? "card flipped" : "card";
+    let cssClass = this.state.flipped ? "inside picked" : "inside";
     if(this.isAlreadyMAtched(name)) {
-      cssClass += " already-matched flipped";
+      cssClass += "inside picked matched";
     }
     return (
-      <div className={cssClass} onClick={this.handleOnClick}>
-        <img src={thumbUrl} alt=""/> 
+      <div className="card" onClick={this.handleOnClick}>
+        <div className={cssClass}>
+          <div className="front">
+            <img src={thumbUrl} alt={name}/> 
+          </div>
+          <div className="back">
+            <img src={logo} alt="logo"/> 
+          </div>
+        </div>
       </div>
     );
   }
