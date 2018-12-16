@@ -1,7 +1,18 @@
 # react-memory
 A Concentration Game Clone
 
+Install dependencies
+===
+npm install
+
+Run the app
+===
+npm start
+
+
+
 The rules
+===
 - all cards are face-down at the beginning X
 - each turn consists of revealing two cards on the table X
 - finding a pair matching cards gives one point and an extra turn X
