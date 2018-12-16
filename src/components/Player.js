@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./Player.css";
-
+import "./Player.scss"; 
 export default class Card extends Component {
     constructor() {
         super();
@@ -10,10 +9,24 @@ export default class Card extends Component {
         };
     }
 
+
+    componentDidUpdate(prevProps) {
+        if (this.props.reset !== prevProps.reset && this.props.reset) { 
+          this.setState({score: this.state.score + 1})
+        }
+      }
+
+    isActive(){
+        return parseInt(this.props.name) === this.props.activePlayer;
+    }
+
     render() { 
+        const cssClass = this.isActive() ? "player active" : "player"; 
+
+        console.log(this.props);
         return (
-            <div className="player" > 
-                Player {this.state.name} : {this.state.score}
+            <div className={cssClass}> 
+                <label>Player {this.props.name}:</label><span> {this.state.score}</span>
             </div>
         );
     }
