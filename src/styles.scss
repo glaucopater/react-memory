@@ -11,11 +11,18 @@ body {
 	font-family: "Arial", sans-serif;
 }
 
-.App, #root {
-  position: relative;
-  height: 100%;
-  min-height: 500px;
-  padding-bottom: 20px;
+.App, #root, .board-container {
+	position: relative;
+	height: 100%;
+	min-height: 500px;
+	padding-bottom: 20px;
+}
+
+.App {
+	h3 {
+		text-align: center;
+		margin: 0;
+	}
 }
 
 @mixin width($max){
