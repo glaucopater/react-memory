@@ -1,8 +1,8 @@
 {
-  "name": "new",
+  "name": "React-Memory",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "A Concentration Game Clone in React",
+  "keywords": ["react","js","game","photo"],
   "main": "src/index.js",
   "dependencies": {
     "node-sass": "^4.11.0",

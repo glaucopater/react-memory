@@ -1,6 +1,6 @@
 import React, { Component } from "react"; 
 import "./Card.scss"; 
-import logo from "../assets/images/eyeem-logo.png"; 
+import logo from "../assets/images/logo.png"; 
 
 
 export default class Card extends Component {
