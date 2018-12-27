@@ -1,5 +1,6 @@
 # react-memory
-A Concentration Game Clone
+A customizable Concentration Game Clone
+[https://en.wikipedia.org/wiki/Concentration_(game)]
 
 Install dependencies
 ===
