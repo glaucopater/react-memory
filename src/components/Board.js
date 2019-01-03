@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import Player from "./Player";
-import { API_URL, X_CLIENT_ID, MAX_ITEMS, ANIMATION_DELAY } from "../constants";
+import { API_URL, X_CLIENT_ID, MAX_ITEMS, ANIMATION_DELAY, MAX_PLAYERS } from "../constants";
 import { shuffle } from "../util";
  
 import "./Board.scss"; 
@@ -16,7 +16,8 @@ export default class Board extends Component {
       cards: [],
       activePlayer: 0,
       round: 1,
-      score: []
+      score: [],
+      players: []
     };
     this.flipCard = this.flipCard.bind(this);
   }
@@ -42,7 +43,6 @@ export default class Board extends Component {
       if (flippedCards.length > 1 && flippedCards[0].name === flippedCards[1].name) { 
         matchedCardsNames.push(flippedCards[0].name);
         flippedCards = [];
-        //currentScore[this.state.activePlayer] = currentScore[this.state.activePlayer] + 1;
         for(let i=0;i<currentScore.length;i++){
           if(currentScore[this.state.activePlayer].name === currentScore[i].name){
             currentScore[i].score = currentScore[i].score + 1;
@@ -63,9 +63,11 @@ export default class Board extends Component {
   };
 
   getNextPlayer(){
-    if(this.state.activePlayer === 0){
-      return 1;
-    } else return 0;
+    if (this.state.activePlayer === MAX_PLAYERS - 1){
+      return 0;
+    } else {
+      return this.state.activePlayer + 1 ;
+    }
   }
 
   delayedReset() { 
@@ -94,6 +96,7 @@ export default class Board extends Component {
       const cards = shuffle(this.randomizeBoard(items));
       //add player score logic
       const score = [{name:"1",score:0},{name:"2",score:0}];
+      
       this.setState({cards,score}); 
     }));  
   }
@@ -116,6 +119,11 @@ export default class Board extends Component {
     return <div className="winning"><label>Player </label>{+winner + 1} wins!</div>
   }
 
+  getBoardContent(matchedCardsNames,cards,newCards,activePlayer){
+    const content = (matchedCardsNames.length === cards.length / 2) ? this.getWinner(activePlayer) : newCards;
+    return content;
+  }
+
   render() {
     let flippedCards = this.state.flippedCards;
     let matchedCardsNames = this.state.matchedCardsNames; 
@@ -132,14 +140,17 @@ export default class Board extends Component {
         />
       );
     });
-    let players = [];
     const round = this.getRound(); 
-    const score0 = this.state.score[0] ? this.state.score[0].score : 0;
-    const score1 = this.state.score[1] ? this.state.score[1].score : 0;
     const activePlayer = this.state.activePlayer;
-    players.push(<Player key="0" name="0" activePlayer={activePlayer} score={score0}/>);
-    players.push(<Player key="1" name="1" activePlayer={activePlayer} score={score1}/>);
-    const boardContent = (matchedCardsNames.length === cards.length / 2) ? this.getWinner(activePlayer) : newCards;
+    const players = (Array.from(Array(MAX_PLAYERS).keys())).map((player, i)=>{
+      const score = this.state.score[i] ? this.state.score[i].score : 0;
+      return (
+      <Player 
+      key={i} 
+      name={player} 
+      activePlayer={activePlayer} 
+      score={score}/>)});
+    const boardContent = this.getBoardContent(matchedCardsNames,cards,newCards,activePlayer);
     return (
     <div className="board-container">
       <div className="game-info">{round}{players}</div>
