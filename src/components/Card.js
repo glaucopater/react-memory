@@ -1,7 +1,6 @@
-import React, { Component } from "react"; 
-import "./Card.scss"; 
-import logo from "../assets/images/logo.png"; 
-
+import React, { Component } from "react";
+import "./Card.scss";
+import logo from "../assets/images/logo.png";
 
 export default class Card extends Component {
   constructor() {
@@ -19,12 +18,12 @@ export default class Card extends Component {
     }
   }
 
-  isAlreadyMAtched(cardName){
+  isAlreadyMAtched(cardName) {
     for (let i = 0; i < this.props.matchedCardsNames.length; i++) {
       if (this.props.matchedCardsNames[i] === cardName) {
         return true;
       }
-    } 
+    }
   }
 
   handleOnClick = event => {
@@ -33,26 +32,28 @@ export default class Card extends Component {
     }
     let id = this.props.id;
     let name = this.props.name;
-    if(!this.state.flipped && !this.isAlreadyMAtched(name)){ 
+    if (!this.state.flipped && !this.isAlreadyMAtched(name)) {
       this.props.flipCard({ id, name });
     }
   };
 
-  render() { 
+  render() {
     let name = this.props.name;
-    let thumbUrl = this.props.thumbUrl; 
+    let thumbUrl = this.props.thumbUrl;
     let cssClass = this.state.flipped ? "inside picked" : "inside";
-    if(this.isAlreadyMAtched(name)) {
+    if (this.isAlreadyMAtched(name)) {
       cssClass += " matched";
     }
+
+    console.log("TCL: Card -> render -> this.props", this.state.flipped);
     return (
       <div className="card" onClick={this.handleOnClick}>
         <div className={cssClass}>
           <div className="front">
-            <img src={thumbUrl} alt={name}/> 
+            <img src={thumbUrl} alt={name} />
           </div>
           <div className="back">
-            <img src={logo} alt="logo"/> 
+            <img src={logo} alt="logo" />
           </div>
         </div>
       </div>
